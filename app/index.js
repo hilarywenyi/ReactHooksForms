@@ -7,7 +7,7 @@ const Form = ({state}) => {
     return (
         <div id='container'>
           <div id='navbar'>
-            Form.js
+            Demo Form Using React Hooks
           </div>
           <form onSumbit={event => {
               event.preventDefault();

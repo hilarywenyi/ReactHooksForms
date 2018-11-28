@@ -1,19 +1,27 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import useInputState from './useInputState';
 
-class Form extends React.Component {
-  render () {
+const Form = ({state}) => {
+    const { value, reset, onChange } = useInputState('');
     return (
-      <div id='container'>
-        <div id='navbar'>
-          Form.js
+        <div id='container'>
+          <div id='navbar'>
+            Form.js
+          </div>
+          <form onSumbit={event => {
+              event.preventDefault();
+              state(value); 
+              reset();
+           }}>
+             <label htmlFor ='username'>Username:</label>
+             <input type='text' name = 'username' onChange = {onChange} value = {value}/>
+             <label htmlFor = 'password'>Password:</label>
+             <input type = 'password' name = 'password' onChange = {onChange} value = {value} />
+             <button type = 'submit'>Submit</button>
+          </form>
         </div>
-        <form>
-          {/* your form fields here */}
-        </form>
-      </div>
-    )
-  }
+      )
 }
 
 ReactDOM.render(

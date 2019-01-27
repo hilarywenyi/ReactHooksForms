@@ -1,27 +1,45 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import useInputState from './useInputState';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
-const Form = ({state}) => {
-    const { value, reset, onChange } = useInputState('');
+class Form extends React.Component {
+  constructor(){
+    super()
+    this.state = {
+      username:'',
+      password: ''
+    }
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+  }
+  handleSubmit(event){
+    event.preventDefault()
+    this.setState({
+      username:'',
+      password:''
+    })
+
+  }
+  handleChange(event){
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  render () {
     return (
-        <div id='container'>
-          <div id='navbar'>
-            Demo Form Using React Hooks
-          </div>
-          <form onSumbit={event => {
-              event.preventDefault();
-              state(value); 
-              reset();
-           }}>
-             <label htmlFor ='username'>Username:</label>
-             <input type='text' name = 'username' onChange = {onChange} value = {value}/>
-             <label htmlFor = 'password'>Password:</label>
-             <input type = 'password' name = 'password' onChange = {onChange} value = {value} />
-             <button type = 'submit'>Submit</button>
-          </form>
+      <div id='container'>
+        <div id='navbar'>
+          Form.js
         </div>
-      )
+        <form onSubmit = {this.handleSubmit}>
+          <label htmlFor='username'>Username:</label>
+          <input type='text' name ='username' value = {this.state.username} onChange = {this.handleChange}/>
+          <label htmlFor='username'>Password:</label>
+          <input type='text' name ='password' value = {this.state.password} onChange = {this.handleChange}/>
+          <button type ='submit'>Submit</button>
+        </form>
+      </div>
+    )
+  }
 }
 
 ReactDOM.render(
